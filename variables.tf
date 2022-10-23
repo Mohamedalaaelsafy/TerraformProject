@@ -3,36 +3,36 @@ variable "region" {
 }
 
 variable "cidr_block" {
-    type = string
+  type = string
 }
 
 
 variable "subnet_cidr" {
-  type = list
+  type = list(any)
 }
 variable "subnet_azs" {
-  type = list
+  type = list(any)
 }
 variable "subnet_name" {
-  type = list
+  type = list(any)
 }
 
 
 variable "sg_name" {
-    type = list
+  type = list(any)
 }
 variable "sg_desc" {
-    type = list
+  type = list(any)
 }
 variable "sg_tags" {
-    type = list
+  type = list(any)
 }
 variable "sg_ports" {
-        type = list
+  type = list(any)
 }
 
 variable "ec2_names" {
-  type = list
+  type = list(any)
 }
 variable "ec2_ami" {
   type = string
@@ -46,10 +46,10 @@ variable "db_cluster_type" {
   type = string
 }
 variable "db_username" {
-  
+
 }
 variable "db_password" {
-  type = string 
+  type = string
 }
 
 variable "elasticache_node_type" {
