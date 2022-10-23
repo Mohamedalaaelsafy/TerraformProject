@@ -1,4 +1,5 @@
 // Generate Key
+
 resource "tls_private_key" "example" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -13,33 +14,17 @@ resource "aws_key_pair" "aws_key" {
 
 
 // Declare Instances
+
 resource "aws_instance" "ec2_public" {
   ami                         = var.ec2_ami
   instance_type               = "t2.micro"
-  availability_zone           = var.az_1a
+  availability_zone           = var.az_1
   subnet_id                   = module.network.subnet_1_public
   key_name                    = aws_key_pair.aws_key.key_name
   associate_public_ip_address = true
-  security_groups             = ["${module.network.security_group_shh}"]
+  security_groups             = [module.network.security_group_id_allow_ssh]
   tags = {
-    Name = "BASTION"
-  }
-  provisioner "local-exec" {
-    command = "echo ${self.public_ip} > ./ec2_public_ips"
-  }
-}
-
-
-resource "aws_instance" "ec2_private" {
-  ami                         = var.ec2_ami
-  instance_type               = "t2.micro"
-  availability_zone           = var.az_1a
-  subnet_id                   = module.network.subnet_1_private
-  key_name                    = aws_key_pair.aws_key.key_name
-  associate_public_ip_address = false
-  security_groups             = ["${module.network.security_group_app}"]
-  tags = {
-    Name = "PRIVATE"
+    Name = "${var.ec2_names[0]}"
   }
   provisioner "local-exec" {
     command = "echo ${self.public_ip} > ./ec2_public_ips"

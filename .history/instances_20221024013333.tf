@@ -37,7 +37,7 @@ resource "aws_instance" "ec2_private" {
   subnet_id                   = module.network.subnet_1_private
   key_name                    = aws_key_pair.aws_key.key_name
   associate_public_ip_address = false
-  security_groups             = ["${module.network.security_group_app}"]
+  security_groups             = module.network.security_group_app
   tags = {
     Name = "PRIVATE"
   }
