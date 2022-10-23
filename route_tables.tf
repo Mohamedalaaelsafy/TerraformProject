@@ -1,22 +1,22 @@
 resource "aws_route_table" "public_route" {
   vpc_id = aws_vpc.name.id
-    route {
+  route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
   }
-     tags = {
-        Name = "public_route"
-    }
+  tags = {
+    Name = "public_route"
+  }
 }
 resource "aws_route_table" "private_route" {
   vpc_id = aws_vpc.name.id
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.ng.id
   }
-     tags = {
-        Name = "private_route"
-    }
+  tags = {
+    Name = "private_route"
+  }
 }
 
 
